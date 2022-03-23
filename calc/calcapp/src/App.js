@@ -1,14 +1,14 @@
 import { useReducer } from "react";
 import "./styles.css"
+import DigitButton from "./DigitButton";
 
-const ACTIONS = {
-  ADD_DIGIT : 'add-digit',
-  CHOOSE_OPERATION : 'choose-operation',
-  CLEAR : 'clear',
-  DELETE : 'delete-digit',
-  EVALUATE : 'evaluate'
+export const ACTIONS = {
+  ADD_DIGIT: "add-digit",
+  CHOOSE_OPERATION: "choose-operation",
+  CLEAR: "clear",
+  DELETE_DIGIT: "delete-digit",
+  EVALUATE: "evaluate",
 }
-
 
 function reducer(state,{ type , payload }){
       switch(type){
@@ -24,7 +24,10 @@ function reducer(state,{ type , payload }){
 
 
 function App() {
-  const [{currentOperand,previousOperand,operation}] = useReducer(reducer,{})
+  const [{ currentOperand, previousOperand, operation }, dispatch] = useReducer(
+    reducer,
+    {}
+  )
 
   dispatchEvent({ type : ACTIONS.ADD_DIGIT,payload : {digit : 1}})
 
@@ -36,7 +39,7 @@ function App() {
       </div>
       <button className="span-two">AC</button>
       <button>DEL</button>
-      <button>/</button>
+      <DigitButton digit = "/" dispatch={dispatch}/>
       <button>1</button>
       <button>2</button>
       <button>3</button>
